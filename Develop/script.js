@@ -30,9 +30,8 @@ var specialCharacters = [
   '_',
   '.',
 ];
-
-
-// Next create a function that allows you to write the code needed to present your users with the prompts for the length of the password and characters they would like to use
+var character = [];
+var passwordLength = 0;
 
 function passwordInput() {
 
@@ -40,14 +39,8 @@ function passwordInput() {
     prompt('How many characters would you like your password to contain?'),
     10
   );
+  passwordLength = length;
 
-  // if (length) {
-  //   window.alert("Numbers Only!")
-  // } else if (length < 8) {
-  //   window.alert("Password has to include atleats 8 characters!")
-  // } else (length > 128) {
-  //   window.alert("Password cannot exceed 128 characters!")
-  // }
 
   // variable with a confirm method for special characters
   var containsSpecialCharacters = confirm(
@@ -60,87 +53,47 @@ function passwordInput() {
   var containsNumbers = confirm('Click OK to confirm including numbers.');
 
 
-  if (false) {
+  if (containsSpecialCharacters === false && containsLowercaseCharacters === false && containsUppercaseCharacters === false && containsNumbers === false) {
     alert("Cannot proceed with password creation.")
   }
+  if (containsSpecialCharacters === true) {
+    character = character.concat(specialCharacters)
+  }
+  if (containsLowercaseCharacters === true) {
+    character = character.concat(lowercaseCharacters)
+  }
+  if (containsUppercaseCharacters === true) {
+    character = character.concat(uppercaseCharacters)
+  }
+  if (containsNumbers === true) {
+    character = character.concat(numbers)
+  }
 
-
-  var userSelectedOptions = {
-    length: length,
-    // created key:value pair for special characters
-    containsSpecialCharacters: containsSpecialCharacters,
-    // created key:value pair for uppercase
-    containsUppercaseCharacters: containsUppercaseCharacters,
-    // created key:value pair for lowercase
-    containsLowercaseCharacters: containsLowercaseCharacters,
-    // created key:value pair for numbers
-    containsNumbers: containsNumbers
-  };
-  return userSelectedOptions;
-
-
+  character = character.join("");
   generatePassword();
 
-}
-passwordInput();
+
+  var generateBtn = document.querySelector("#generate");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// questions()
-// var question1 = confirm("Would you like numbers?");
-// var question2 = confirm("Would you like special characters?");
-
-
-
-// function questions() {
-//   // if 1 and 2 are true it populates a random password
-//   if (question1 && question2) {
-//     writePassword()
-//     // if 1 is true and 2 isn't it will throw the alert below
-//   } else if (question1 === true) {
-//     alert("Password needs numbers!")
-//     // if 1 is false and 2 is true then the alert message below displays
-//   } else if (question2 === true) {
-//     alert("Password needs a special character!")
-//   } else { }// I dont know
-//   return;
-// }
-
-
-var generateBtn = document.querySelector("#generate");
-
-
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-}
-
-// var password = document.getElementById("password");
-
-function generatePassword() {
-  var characters = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var passwordLength = 8;
-  var password = "";
-  for (var i = 0; i <= passwordLength; i++) {
-    var randomNumber = Math.floor(Math.random() * characters.length);
-    password += characters.substring(randomNumber, randomNumber + 1);
+  function writePassword() {
+    passwordInput();
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
   }
-  document.getElementById("password").value = password;
-}
 
 
-generateBtn.addEventListener("click", writePassword);
+  function generatePassword() {
+    var password = "";
+
+    for (var i = 0; i <= passwordLength; i++) {
+      var randomNumber = Math.floor(Math.random() * character.length);
+      console.log(character)
+      password += character.substring(randomNumber, randomNumber + 1);
+    }
+    document.getElementById("password").value = password;
+    character = [];
+  }
+
+
+  generateBtn.addEventListener("click", writePassword);
