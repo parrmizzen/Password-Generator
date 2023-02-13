@@ -1,23 +1,24 @@
-
 questions()
 var question1 = confirm("Would you like numbers?");
-var question2 = confirm("Would you like special characters");
+var question2 = confirm("Would you like special characters?");
 
 
 
 function questions() {
+  // if 1 and 2 are true it populates a random password
   if (question1 && question2) {
     writePassword()
-  } else if (question1) {
+    // if 1 is true and 2 isn't it will throw the alert below
+  } else if (question1 === true) {
     alert("Password needs numbers!")
-  } else if (question2) {
+    // if 1 is false and 2 is true then the alert message below displays
+  } else if (question2 === true) {
     alert("Password needs a special character!")
-  } else { }
+  } else { }// I dont know
   return;
 }
 
-
-
+// 
 var generateBtn = document.querySelector("#generate");
 
 
