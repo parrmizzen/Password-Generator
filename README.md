@@ -3,7 +3,7 @@
 Random Password Generator
 # Usage
 
-You can visit this website by clicking on this link (https://parrmizzen.github.io/Horiseon-Marketing/).
+You can visit this website by clicking on this link (https://parrmizzen.github.io/Password-Generator/).
 
 
 # Description
