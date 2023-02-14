@@ -70,30 +70,33 @@ function passwordInput() {
   }
 
   character = character.join("");
-  generatePassword();
+  console.log(character, "this is character")
+}
 
 
-  var generateBtn = document.querySelector("#generate");
 
 
-  function writePassword() {
-    passwordInput();
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
+var generateBtn = document.querySelector("#generate");
+
+
+function writePassword() {
+  passwordInput();
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+}
+
+
+function generatePassword() {
+  var password = "";
+
+  for (var i = 0; i <= passwordLength; i++) {
+    var randomNumber = Math.floor(Math.random() * character.length);
+    console.log(character)
+    password += character.substring(randomNumber, randomNumber + 1);
   }
+  document.getElementById("password").value = password;
+  character = [];
+}
 
 
-  function generatePassword() {
-    var password = "";
-
-    for (var i = 0; i <= passwordLength; i++) {
-      var randomNumber = Math.floor(Math.random() * character.length);
-      console.log(character)
-      password += character.substring(randomNumber, randomNumber + 1);
-    }
-    document.getElementById("password").value = password;
-    character = [];
-  }
-
-
-  generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", writePassword);
